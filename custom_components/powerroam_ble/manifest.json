@@ -7,6 +7,10 @@
       "local_name": "ugreen gs*"
     }
   ],
+  "categories": [
+    "energy.backup_power",
+    "energy.solar_batteries"
+  ],
   "codeowners": [
     "@sky-gambler"
   ],
