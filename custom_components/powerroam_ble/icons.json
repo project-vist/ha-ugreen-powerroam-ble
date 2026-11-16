@@ -1,0 +1,90 @@
+{
+  "entity": {
+    "sensor": {
+      "mode": {
+        "default": "mdi:battery-sync-outline",
+        "state": {
+          "charging": "mdi:battery-charging",
+          "bypass": "mdi:power-plug",
+          "discharging": "mdi:battery-arrow-down",
+          "idle": "mdi:battery-check"
+        }
+      },
+      "battery_power": {
+        "default": "mdi:battery-sync-outline"
+      },
+      "battery_health": {
+        "default": "mdi:heart-pulse"
+      },
+      "battery_cycles": {
+        "default": "mdi:battery-sync"
+      },
+      "capacity_remaining": {
+        "default": "mdi:battery-medium"
+      },
+      "fault_raw": {
+        "default": "mdi:alert-circle-outline"
+      }
+    },
+    "binary_sensor": {
+      "low_battery_warning": {
+        "default": "mdi:battery-check",
+        "state": {
+          "on": "mdi:battery-alert-variant-outline"
+        }
+      },
+      "standby": {
+        "default": "mdi:power",
+        "state": {
+          "on": "mdi:power-sleep"
+        }
+      }
+    },
+    "switch": {
+      "quiet_mode": {
+        "default": "mdi:volume-high",
+        "state": {
+          "on": "mdi:volume-off"
+        }
+      },
+      "u_turbo": {
+        "default": "mdi:flash-outline",
+        "state": {
+          "on": "mdi:flash"
+        }
+      },
+      "battery_care": {
+        "default": "mdi:battery-heart-variant"
+      },
+      "child_lock": {
+        "default": "mdi:lock-open-variant-outline",
+        "state": {
+          "on": "mdi:lock-outline"
+        }
+      },
+      "key_beep": {
+        "default": "mdi:volume-off",
+        "state": {
+          "on": "mdi:volume-high"
+        }
+      }
+    },
+    "select": {
+      "light": {
+        "default": "mdi:flashlight",
+        "state": {
+          "off": "mdi:flashlight-off"
+        }
+      },
+      "operating_mode": {
+        "default": "mdi:timer-cog-outline"
+      },
+      "dc_charge_current": {
+        "default": "mdi:current-dc"
+      },
+      "low_battery_alert": {
+        "default": "mdi:battery-alert-variant-outline"
+      }
+    }
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "Vyberte nabíjecí stanici. Nejprve zavřete aplikaci UGREEN: zařízení přijímá jen jedno Bluetooth spojení najednou.",
+        "data": {
+          "address": "Zařízení"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "Nastavit {name}? Home Assistant čte její stav a může přepínat výstupy, světlo a některá nastavení. Dokud Home Assistant drží spojení, aplikace UGREEN se nemůže připojit."
+      }
+    },
+    "abort": {
+      "already_configured": "Tato nabíjecí stanice je už nastavena.",
+      "no_devices_found": "Žádná PowerRoam nebyla nalezena. Zkontrolujte, že je zapnutá, v dosahu a že k ní není připojena aplikace UGREEN."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Baterie"
+      },
+      "input_power": {
+        "name": "Vstupní výkon"
+      },
+      "output_power": {
+        "name": "Výstupní výkon"
+      },
+      "ac_output_power": {
+        "name": "Výkon výstupu AC"
+      },
+      "usb_output_power": {
+        "name": "Výkon výstupů USB"
+      },
+      "dc_output_power": {
+        "name": "Výkon výstupu DC"
+      },
+      "charge_time": {
+        "name": "Zbývající doba nabíjení"
+      },
+      "discharge_time": {
+        "name": "Zbývající doba vybíjení"
+      },
+      "battery_voltage": {
+        "name": "Napětí baterie"
+      },
+      "mode": {
+        "name": "Režim",
+        "state": {
+          "charging": "Nabíjí se",
+          "bypass": "Bypass",
+          "discharging": "Z baterie",
+          "idle": "Nečinná"
+        }
+      },
+      "battery_power": {
+        "name": "Výkon baterie"
+      },
+      "energy_remaining": {
+        "name": "Zbývající energie"
+      },
+      "battery_health": {
+        "name": "Stav baterie"
+      },
+      "battery_cycles": {
+        "name": "Cykly baterie"
+      },
+      "capacity_remaining": {
+        "name": "Zbývající kapacita"
+      },
+      "battery_temp_1": {
+        "name": "Teplota baterie 1"
+      },
+      "battery_temp_2": {
+        "name": "Teplota baterie 2"
+      },
+      "inverter_temp_1": {
+        "name": "Teplota měniče 1"
+      },
+      "inverter_temp_2": {
+        "name": "Teplota měniče 2"
+      },
+      "ac_frequency": {
+        "name": "Frekvence AC"
+      },
+      "cell_spread": {
+        "name": "Rozptyl napětí článků"
+      },
+      "cell_voltage": {
+        "name": "Napětí článku {cell}"
+      },
+      "fault_raw": {
+        "name": "Bajty poruchy (surové)"
+      },
+      "rssi": {
+        "name": "Síla signálu"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "Porucha"
+      },
+      "low_battery_warning": {
+        "name": "Varování o nízkém stavu baterie"
+      },
+      "standby": {
+        "name": "Pohotovostní režim"
+      },
+      "connected": {
+        "name": "Připojeno"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "Výstup AC"
+      },
+      "dc_output": {
+        "name": "Výstup DC"
+      },
+      "usb_output": {
+        "name": "Výstupy USB"
+      },
+      "quiet_mode": {
+        "name": "Tichý režim"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "Šetření baterie"
+      },
+      "child_lock": {
+        "name": "Dětská pojistka"
+      },
+      "key_beep": {
+        "name": "Zvukové signály"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "Světlo",
+        "state": {
+          "off": "Vypnuto",
+          "low": "Slabé",
+          "high": "Silné",
+          "strobe": "Stroboskop",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "Provozní režim",
+        "state": {
+          "standard": "Standardní (5 h)",
+          "eco": "Úsporný (2 h)",
+          "always_on": "Vždy zapnuto"
+        }
+      },
+      "dc_charge_current": {
+        "name": "Nabíjecí proud DC",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "Práh varování o nízkém stavu baterie",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "Momentálně není Bluetooth spojení s PowerRoam."
+    },
+    "write_failed": {
+      "message": "Zápis do PowerRoam selhal: {error}"
+    },
+    "no_report": {
+      "message": "PowerRoam neoznámila aktuální stav pro „{setting}“."
+    },
+    "not_confirmed": {
+      "message": "PowerRoam nepotvrdila změnu „{setting}“."
+    },
+    "other_settings_changed": {
+      "message": "Změnila se i další nastavení: {settings}. Zkontrolujte stanici."
+    }
+  }
+}

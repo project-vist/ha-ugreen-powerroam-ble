@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "Escolha a estação de energia. Feche antes o app da UGREEN: o aparelho aceita apenas uma conexão Bluetooth por vez.",
+        "data": {
+          "address": "Dispositivo"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "Configurar {name}? O Home Assistant lê o estado dela e pode ligar e desligar as saídas, a luz e algumas configurações. Enquanto o Home Assistant mantiver a conexão, o app da UGREEN não consegue se conectar."
+      }
+    },
+    "abort": {
+      "already_configured": "Esta estação de energia já está configurada.",
+      "no_devices_found": "Nenhuma PowerRoam encontrada. Verifique se ela está ligada, ao alcance e se o app da UGREEN não está conectado a ela."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Bateria"
+      },
+      "input_power": {
+        "name": "Potência de entrada"
+      },
+      "output_power": {
+        "name": "Potência de saída"
+      },
+      "ac_output_power": {
+        "name": "Potência da saída AC"
+      },
+      "usb_output_power": {
+        "name": "Potência das saídas USB"
+      },
+      "dc_output_power": {
+        "name": "Potência da saída DC"
+      },
+      "charge_time": {
+        "name": "Tempo de carga restante"
+      },
+      "discharge_time": {
+        "name": "Autonomia restante"
+      },
+      "battery_voltage": {
+        "name": "Tensão da bateria"
+      },
+      "mode": {
+        "name": "Modo",
+        "state": {
+          "charging": "Carregando",
+          "bypass": "Bypass",
+          "discharging": "Na bateria",
+          "idle": "Inativo"
+        }
+      },
+      "battery_power": {
+        "name": "Potência da bateria"
+      },
+      "energy_remaining": {
+        "name": "Energia restante"
+      },
+      "battery_health": {
+        "name": "Saúde da bateria"
+      },
+      "battery_cycles": {
+        "name": "Ciclos da bateria"
+      },
+      "capacity_remaining": {
+        "name": "Capacidade restante"
+      },
+      "battery_temp_1": {
+        "name": "Temperatura da bateria 1"
+      },
+      "battery_temp_2": {
+        "name": "Temperatura da bateria 2"
+      },
+      "inverter_temp_1": {
+        "name": "Temperatura do inversor 1"
+      },
+      "inverter_temp_2": {
+        "name": "Temperatura do inversor 2"
+      },
+      "ac_frequency": {
+        "name": "Frequência AC"
+      },
+      "cell_spread": {
+        "name": "Diferença de tensão entre células"
+      },
+      "cell_voltage": {
+        "name": "Tensão da célula {cell}"
+      },
+      "fault_raw": {
+        "name": "Bytes de falha (brutos)"
+      },
+      "rssi": {
+        "name": "Intensidade do sinal"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "Falha"
+      },
+      "low_battery_warning": {
+        "name": "Aviso de bateria fraca"
+      },
+      "standby": {
+        "name": "Em espera"
+      },
+      "connected": {
+        "name": "Conectado"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "Saída AC"
+      },
+      "dc_output": {
+        "name": "Saída DC"
+      },
+      "usb_output": {
+        "name": "Saídas USB"
+      },
+      "quiet_mode": {
+        "name": "Modo silencioso"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "Preservação da bateria"
+      },
+      "child_lock": {
+        "name": "Bloqueio infantil"
+      },
+      "key_beep": {
+        "name": "Sinais sonoros"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "Luz",
+        "state": {
+          "off": "Desligada",
+          "low": "Baixa",
+          "high": "Alta",
+          "strobe": "Estroboscópica",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "Modo de funcionamento",
+        "state": {
+          "standard": "Padrão (5 h)",
+          "eco": "Eco (2 h)",
+          "always_on": "Sempre ligado"
+        }
+      },
+      "dc_charge_current": {
+        "name": "Corrente de carga DC",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "Limite do aviso de bateria fraca",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "No momento não há conexão Bluetooth com a PowerRoam."
+    },
+    "write_failed": {
+      "message": "Falha ao gravar na PowerRoam: {error}"
+    },
+    "no_report": {
+      "message": "A PowerRoam não informou o estado atual de \"{setting}\"."
+    },
+    "not_confirmed": {
+      "message": "A PowerRoam não confirmou a alteração de \"{setting}\"."
+    },
+    "other_settings_changed": {
+      "message": "Outras configurações também mudaram: {settings}. Verifique a estação."
+    }
+  }
+}

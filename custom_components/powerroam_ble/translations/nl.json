@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "Kies het powerstation. Sluit eerst de UGREEN-app: het apparaat accepteert maar één Bluetooth-verbinding tegelijk.",
+        "data": {
+          "address": "Apparaat"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "{name} instellen? Home Assistant leest de status en kan de uitgangen, de lamp en enkele instellingen schakelen. Zolang Home Assistant de verbinding vasthoudt, kan de UGREEN-app geen verbinding maken."
+      }
+    },
+    "abort": {
+      "already_configured": "Dit powerstation is al ingesteld.",
+      "no_devices_found": "Geen PowerRoam gevonden. Controleer of hij aan staat, binnen bereik is en of de UGREEN-app er niet mee verbonden is."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Accu"
+      },
+      "input_power": {
+        "name": "Ingangsvermogen"
+      },
+      "output_power": {
+        "name": "Uitgangsvermogen"
+      },
+      "ac_output_power": {
+        "name": "AC-uitgangsvermogen"
+      },
+      "usb_output_power": {
+        "name": "USB-uitgangsvermogen"
+      },
+      "dc_output_power": {
+        "name": "DC-uitgangsvermogen"
+      },
+      "charge_time": {
+        "name": "Resterende laadtijd"
+      },
+      "discharge_time": {
+        "name": "Resterende ontlaadtijd"
+      },
+      "battery_voltage": {
+        "name": "Accuspanning"
+      },
+      "mode": {
+        "name": "Modus",
+        "state": {
+          "charging": "Laden",
+          "bypass": "Bypass",
+          "discharging": "Op accu",
+          "idle": "Inactief"
+        }
+      },
+      "battery_power": {
+        "name": "Accuvermogen"
+      },
+      "energy_remaining": {
+        "name": "Resterende energie"
+      },
+      "battery_health": {
+        "name": "Accuconditie"
+      },
+      "battery_cycles": {
+        "name": "Accucycli"
+      },
+      "capacity_remaining": {
+        "name": "Resterende capaciteit"
+      },
+      "battery_temp_1": {
+        "name": "Accutemperatuur 1"
+      },
+      "battery_temp_2": {
+        "name": "Accutemperatuur 2"
+      },
+      "inverter_temp_1": {
+        "name": "Omvormertemperatuur 1"
+      },
+      "inverter_temp_2": {
+        "name": "Omvormertemperatuur 2"
+      },
+      "ac_frequency": {
+        "name": "AC-frequentie"
+      },
+      "cell_spread": {
+        "name": "Spanningsverschil tussen cellen"
+      },
+      "cell_voltage": {
+        "name": "Celspanning {cell}"
+      },
+      "fault_raw": {
+        "name": "Foutbytes (ruw)"
+      },
+      "rssi": {
+        "name": "Signaalsterkte"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "Storing"
+      },
+      "low_battery_warning": {
+        "name": "Waarschuwing lage accu"
+      },
+      "standby": {
+        "name": "Stand-by"
+      },
+      "connected": {
+        "name": "Verbonden"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "AC-uitgang"
+      },
+      "dc_output": {
+        "name": "DC-uitgang"
+      },
+      "usb_output": {
+        "name": "USB-uitgang"
+      },
+      "quiet_mode": {
+        "name": "Stille modus"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "Accubehoud"
+      },
+      "child_lock": {
+        "name": "Kinderslot"
+      },
+      "key_beep": {
+        "name": "Geluidssignalen"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "Lamp",
+        "state": {
+          "off": "Uit",
+          "low": "Laag",
+          "high": "Hoog",
+          "strobe": "Stroboscoop",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "Bedrijfsmodus",
+        "state": {
+          "standard": "Standaard (5 u)",
+          "eco": "Eco (2 u)",
+          "always_on": "Altijd aan"
+        }
+      },
+      "dc_charge_current": {
+        "name": "DC-laadstroom",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "Drempel voor lage-accuwaarschuwing",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "Er is nu geen Bluetooth-verbinding met de PowerRoam."
+    },
+    "write_failed": {
+      "message": "Schrijven naar de PowerRoam mislukt: {error}"
+    },
+    "no_report": {
+      "message": "De PowerRoam meldde de huidige status van ‘{setting}’ niet."
+    },
+    "not_confirmed": {
+      "message": "De PowerRoam bevestigde de wijziging van ‘{setting}’ niet."
+    },
+    "other_settings_changed": {
+      "message": "Ook andere instellingen zijn gewijzigd: {settings}. Controleer het powerstation."
+    }
+  }
+}

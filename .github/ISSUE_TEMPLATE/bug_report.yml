@@ -1,0 +1,45 @@
+name: Bug report
+description: Something doesn't work, or a value disagrees with the UGREEN app or the unit's screen.
+labels: [bug]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: As in the UGREEN app (About the PowerRoam → Model), e.g. GS1200.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Integration and Home Assistant versions
+      placeholder: "1.0.0 on Home Assistant 2026.10.4"
+    validations:
+      required: true
+  - type: input
+    id: adapter
+    attributes:
+      label: Bluetooth adapter
+      description: Built-in (which host?), USB dongle, or ESPHome Bluetooth proxy.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: For a wrong value, say what the app or the unit's screen shows at the same moment.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: >-
+        Settings → Devices & services → UGREEN PowerRoam (Bluetooth) → ⋮ → Download diagnostics,
+        and attach the file. It holds no Bluetooth address, serial number or MAC.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant lines from Settings → System → Logs. Debug logging is described in the README.
+      render: text

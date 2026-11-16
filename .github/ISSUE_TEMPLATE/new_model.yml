@@ -1,0 +1,38 @@
+name: Another PowerRoam model
+description: Report how the integration works with a model other than the GS1200.
+labels: [model support]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Model and advertised name
+      description: Model from the UGREEN app, and the name Home Assistant discovered (e.g. "ugreen gs600").
+    validations:
+      required: true
+  - type: input
+    id: capacity
+    attributes:
+      label: Battery capacity (Wh)
+      description: From the spec sheet; it enables Mode, Battery power and Energy remaining for the model.
+  - type: textarea
+    id: app
+    attributes:
+      label: What the UGREEN app shows
+      description: >-
+        Battery %, input and output watts, and every setting you can see (AC frequency, U-Turbo,
+        quiet mode, battery preservation, operating mode, DC charging current, low battery alert,
+        screen brightness and timeout). Note them, close the app, then download diagnostics within a minute.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Attach the diagnostics file. It holds no Bluetooth address, serial number or MAC.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything that disagrees
+      description: Values that differ from the app or the screen, and controls that didn't work.

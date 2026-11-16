@@ -1,0 +1,23 @@
+{
+  "domain": "powerroam_ble",
+  "name": "UGREEN PowerRoam (Bluetooth)",
+  "bluetooth": [
+    {
+      "connectable": true,
+      "local_name": "ugreen gs*"
+    }
+  ],
+  "codeowners": [
+    "@sky-gambler"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "bluetooth_adapters"
+  ],
+  "documentation": "https://github.com/sky-gambler/ha-ugreen-powerroam-ble",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/sky-gambler/ha-ugreen-powerroam-ble/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}
