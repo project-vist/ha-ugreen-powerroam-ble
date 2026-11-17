@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 (project-vist fork)
+
+- PowerRoam 2200 (GS2200): battery capacity 2048 Wh built in, so Mode, Battery power and Energy remaining appear for it.
+- Battery capacity can be set for any model under *Configure*; the entry reloads with it.
+- Adding a unit by hand lists any `ugreen…` device when none advertises as `ugreen gs…`.
+
 ## 1.0.0
 
 First public release, tested on a PowerRoam 1200 (GS1200).

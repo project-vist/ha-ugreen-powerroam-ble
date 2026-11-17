@@ -1,9 +1,12 @@
 # UGREEN PowerRoam (Bluetooth) for Home Assistant
 
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz/docs/faq/custom_repositories)
-[![Release](https://img.shields.io/github/v/release/sky-gambler/ha-ugreen-powerroam-ble)](https://github.com/sky-gambler/ha-ugreen-powerroam-ble/releases)
-[![Validate](https://github.com/sky-gambler/ha-ugreen-powerroam-ble/actions/workflows/validate.yml/badge.svg)](https://github.com/sky-gambler/ha-ugreen-powerroam-ble/actions/workflows/validate.yml)
-[![Tests](https://github.com/sky-gambler/ha-ugreen-powerroam-ble/actions/workflows/tests.yml/badge.svg)](https://github.com/sky-gambler/ha-ugreen-powerroam-ble/actions/workflows/tests.yml)
+[![Release](https://img.shields.io/github/v/release/project-vist/ha-ugreen-powerroam-ble)](https://github.com/project-vist/ha-ugreen-powerroam-ble/releases)
+[![Validate](https://github.com/project-vist/ha-ugreen-powerroam-ble/actions/workflows/validate.yml/badge.svg)](https://github.com/project-vist/ha-ugreen-powerroam-ble/actions/workflows/validate.yml)
+[![Tests](https://github.com/project-vist/ha-ugreen-powerroam-ble/actions/workflows/tests.yml/badge.svg)](https://github.com/project-vist/ha-ugreen-powerroam-ble/actions/workflows/tests.yml)
+
+> [!IMPORTANT]
+> **Fork of [sky-gambler/ha-ugreen-powerroam-ble](https://github.com/sky-gambler/ha-ugreen-powerroam-ble)** with PowerRoam 2200 support: the GS2200's capacity (2048 Wh) is known, the battery capacity can be set for any model under *Configure*, and the device list falls back to any `ugreen…` name when no unit advertises as `ugreen gs…`. Install it from HACS as the custom repository `https://github.com/project-vist/ha-ugreen-powerroam-ble`.
 
 A local Home Assistant integration for UGREEN PowerRoam portable power stations. It talks to the unit directly over Bluetooth LE: no cloud, no UGREEN account. It reads everything the unit reports, switches its outputs and settings, and sets its light.
 
@@ -15,9 +18,10 @@ A local Home Assistant integration for UGREEN PowerRoam portable power stations.
 | Model | Status |
 |---|---|
 | **PowerRoam 1200 (GS1200)** | Tested: every value checked against the UGREEN app, every control tried on the unit; two controls don't take effect yet (see [Known issues](#known-issues)). |
-| Other PowerRoam models that advertise as `ugreen gs…` | Likely to work (the protocol is shared), untested. Mode, Battery power and Energy remaining need the model's capacity and appear only for the GS1200 until someone reports another model. |
+| PowerRoam 2200 (GS2200) | Untested. Capacity 2048 Wh is built in; the advertised name `ugreen gs2200` is assumed. |
+| Other PowerRoam models that advertise as `ugreen gs…` | Likely to work (the protocol is shared), untested. Mode, Battery power and Energy remaining need the battery capacity: set it under *Configure* on the integration's entry. |
 
-Have another model? Please [open a model report](https://github.com/sky-gambler/ha-ugreen-powerroam-ble/issues/new?template=new_model.yml) with a diagnostics file.
+Have another model? Please [open a model report](https://github.com/project-vist/ha-ugreen-powerroam-ble/issues/new) with a diagnostics file.
 
 ## Requirements
 
@@ -29,9 +33,9 @@ Have another model? Please [open a model report](https://github.com/sky-gambler/
 
 ### HACS
 
-[![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=sky-gambler&repository=ha-ugreen-powerroam-ble&category=integration)
+[![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=project-vist&repository=ha-ugreen-powerroam-ble&category=integration)
 
-Or by hand: HACS → ⋮ → **Custom repositories** → `https://github.com/sky-gambler/ha-ugreen-powerroam-ble`, type **Integration**. Install **UGREEN PowerRoam (Bluetooth)**, then restart Home Assistant.
+Or by hand: HACS → ⋮ → **Custom repositories** → `https://github.com/project-vist/ha-ugreen-powerroam-ble`, type **Integration**. Install **UGREEN PowerRoam (Bluetooth)**, then restart Home Assistant.
 
 ### Manual
 
@@ -100,7 +104,7 @@ Never written, by design:
 The unit doesn't report how much power flows into or out of the battery itself. The integration derives it from the unit's own discharge estimate: capacity × state of charge ÷ hours left. In bypass that gives about −2 W (the unit's own draw, or the rounding of its estimate), and close to the output power when the unit runs on battery.
 
 - **Mode** is *Charging* while input power is above 5 W (*Bypass* if the battery is at 99 % or more), *Bypass* while the battery's own draw is under half the output, *On battery* otherwise, and *Idle* with nothing drawing.
-- These values need the battery capacity, known for the GS1200 (1024 Wh).
+- These values need the battery capacity: built in for the GS1200 (1024 Wh) and GS2200 (2048 Wh), or set under *Configure* for any model.
 
 ## Known issues
 

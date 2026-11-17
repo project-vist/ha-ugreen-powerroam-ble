@@ -1,4 +1,7 @@
-"""Config flow: Bluetooth discovery by name, or a pick list of visible units."""
+"""Config flow: Bluetooth discovery by name, or a pick list of visible units.
+
+Options: the battery capacity, for models the integration doesn't know.
+"""
 
 from __future__ import annotations
 
@@ -9,14 +12,31 @@ from homeassistant.components.bluetooth import (
     BluetoothServiceInfoBleak,
     async_discovered_service_info,
 )
-from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
-from homeassistant.const import CONF_ADDRESS, CONF_NAME
+from homeassistant.config_entries import (
+    ConfigEntry,
+    ConfigFlow,
+    ConfigFlowResult,
+    OptionsFlowWithReload,
+)
+from homeassistant.const import CONF_ADDRESS, CONF_NAME, UnitOfEnergy
+from homeassistant.core import callback
+from homeassistant.helpers.selector import (
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
+)
 
-from .const import DOMAIN, NAME_PREFIX
+from .const import CAPACITY_WH, CONF_CAPACITY_WH, DOMAIN, FALLBACK_NAME_PREFIX, NAME_PREFIX
+from .protocol import model_from_name
 
 
 class PowerRoamConfigFlow(ConfigFlow, domain=DOMAIN):
     VERSION = 1
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(config_entry: ConfigEntry) -> PowerRoamOptionsFlow:
+        return PowerRoamOptionsFlow()
 
     def __init__(self) -> None:
         self._address: str | None = None
@@ -53,13 +73,18 @@ class PowerRoamConfigFlow(ConfigFlow, domain=DOMAIN):
             return self._create_entry()
 
         current = self._async_current_ids(include_ignore=False)
-        self._discovered = {
+        visible = {
             info.address: info.name
             for info in async_discovered_service_info(self.hass, connectable=True)
             if info.name
-            and info.name.lower().startswith(NAME_PREFIX)
+            and info.name.lower().startswith(FALLBACK_NAME_PREFIX)
             and info.address not in current
         }
+        self._discovered = {
+            address: name
+            for address, name in visible.items()
+            if name.lower().startswith(NAME_PREFIX)
+        } or visible
         if not self._discovered:
             return self.async_abort(reason="no_devices_found")
         return self.async_show_form(
@@ -80,4 +105,35 @@ class PowerRoamConfigFlow(ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(
             title=self._name or self._address,
             data={CONF_ADDRESS: self._address, CONF_NAME: self._name},
+        )
+
+
+class PowerRoamOptionsFlow(OptionsFlowWithReload):
+    async def async_step_init(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
+        if user_input is not None:
+            return self.async_create_entry(data=user_input)
+
+        model = model_from_name(self.config_entry.data.get(CONF_NAME))
+        capacity = self.config_entry.options.get(CONF_CAPACITY_WH) or CAPACITY_WH.get(model or "")
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Optional(
+                        CONF_CAPACITY_WH, description={"suggested_value": capacity}
+                    ): vol.All(
+                        NumberSelector(
+                            NumberSelectorConfig(
+                                min=100,
+                                max=20000,
+                                step=1,
+                                mode=NumberSelectorMode.BOX,
+                                unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+                            )
+                        ),
+                        vol.Coerce(int),
+                    )
+                }
+            ),
+            description_placeholders={"model": model or "?"},
         )

@@ -179,5 +179,20 @@ def test_derived_needs_a_known_capacity_and_the_powers() -> None:
     assert protocol.derived({"battery": 50}, 1024) == {"energy_remaining": 512}
 
 
+def test_derived_scales_with_the_capacity() -> None:
+    data = {"battery": 50, "input_power": 0, "output_power": 200, "discharge_time": 307}
+    out = protocol.derived(data, 2048)
+    assert out["energy_remaining"] == 1024
+    assert (out["mode"], out["battery_power"]) == ("discharging", -200)
+
+
+@pytest.mark.parametrize(
+    ("name", "model"),
+    [("ugreen gs1200", "GS1200"), ("UGREEN GS2200", "GS2200"), ("", None), (None, None)],
+)
+def test_model_from_name(name: str | None, model: str | None) -> None:
+    assert protocol.model_from_name(name) == model
+
+
 def test_private_frames_are_listed() -> None:
     assert {0x05, 0x21} <= protocol.PRIVATE_OPCODES
