@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "Güç istasyonunu seçin. Önce UGREEN uygulamasını kapatın: cihaz aynı anda yalnızca bir Bluetooth bağlantısı kabul eder.",
+        "data": {
+          "address": "Cihaz"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "{name} kurulsun mu? Home Assistant durumunu okur ve çıkışları, ışığı ve bazı ayarları değiştirebilir. Home Assistant bağlantıyı tuttuğu sürece UGREEN uygulaması bağlanamaz."
+      }
+    },
+    "abort": {
+      "already_configured": "Bu güç istasyonu zaten kurulu.",
+      "no_devices_found": "PowerRoam bulunamadı. Açık ve menzil içinde olduğunu ve UGREEN uygulamasının ona bağlı olmadığını kontrol edin."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Pil"
+      },
+      "input_power": {
+        "name": "Giriş gücü"
+      },
+      "output_power": {
+        "name": "Çıkış gücü"
+      },
+      "ac_output_power": {
+        "name": "AC çıkış gücü"
+      },
+      "usb_output_power": {
+        "name": "USB çıkış gücü"
+      },
+      "dc_output_power": {
+        "name": "DC çıkış gücü"
+      },
+      "charge_time": {
+        "name": "Kalan şarj süresi"
+      },
+      "discharge_time": {
+        "name": "Kalan deşarj süresi"
+      },
+      "battery_voltage": {
+        "name": "Pil gerilimi"
+      },
+      "mode": {
+        "name": "Mod",
+        "state": {
+          "charging": "Şarj oluyor",
+          "bypass": "Bypass",
+          "discharging": "Pilde",
+          "idle": "Boşta"
+        }
+      },
+      "battery_power": {
+        "name": "Pil gücü"
+      },
+      "energy_remaining": {
+        "name": "Kalan enerji"
+      },
+      "battery_health": {
+        "name": "Pil sağlığı"
+      },
+      "battery_cycles": {
+        "name": "Pil döngüleri"
+      },
+      "capacity_remaining": {
+        "name": "Kalan kapasite"
+      },
+      "battery_temp_1": {
+        "name": "Pil sıcaklığı 1"
+      },
+      "battery_temp_2": {
+        "name": "Pil sıcaklığı 2"
+      },
+      "inverter_temp_1": {
+        "name": "İnvertör sıcaklığı 1"
+      },
+      "inverter_temp_2": {
+        "name": "İnvertör sıcaklığı 2"
+      },
+      "ac_frequency": {
+        "name": "AC frekansı"
+      },
+      "cell_spread": {
+        "name": "Hücre gerilimi farkı"
+      },
+      "cell_voltage": {
+        "name": "Hücre {cell} gerilimi"
+      },
+      "fault_raw": {
+        "name": "Arıza baytları (ham)"
+      },
+      "rssi": {
+        "name": "Sinyal gücü"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "Arıza"
+      },
+      "low_battery_warning": {
+        "name": "Düşük pil uyarısı"
+      },
+      "standby": {
+        "name": "Bekleme"
+      },
+      "connected": {
+        "name": "Bağlı"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "AC çıkışı"
+      },
+      "dc_output": {
+        "name": "DC çıkışı"
+      },
+      "usb_output": {
+        "name": "USB çıkışı"
+      },
+      "quiet_mode": {
+        "name": "Sessiz mod"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "Pil koruma"
+      },
+      "child_lock": {
+        "name": "Çocuk kilidi"
+      },
+      "key_beep": {
+        "name": "Sesli uyarılar"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "Işık",
+        "state": {
+          "off": "Kapalı",
+          "low": "Düşük",
+          "high": "Yüksek",
+          "strobe": "Flaş",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "Çalışma modu",
+        "state": {
+          "standard": "Standart (5 sa)",
+          "eco": "Eko (2 sa)",
+          "always_on": "Her zaman açık"
+        }
+      },
+      "dc_charge_current": {
+        "name": "DC şarj akımı",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "Düşük pil uyarı eşiği",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "Şu anda PowerRoam ile Bluetooth bağlantısı yok."
+    },
+    "write_failed": {
+      "message": "PowerRoam'a yazma başarısız oldu: {error}"
+    },
+    "no_report": {
+      "message": "PowerRoam, \"{setting}\" için güncel durumu bildirmedi."
+    },
+    "not_confirmed": {
+      "message": "PowerRoam, \"{setting}\" değişikliğini onaylamadı."
+    },
+    "other_settings_changed": {
+      "message": "Başka ayarlar da değişti: {settings}. İstasyonu kontrol edin."
+    }
+  }
+}

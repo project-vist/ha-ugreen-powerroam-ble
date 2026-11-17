@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "Pick the power station. Close the UGREEN app first: the unit takes one Bluetooth connection at a time.",
+        "data": {
+          "address": "Device"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "Set up {name}? Home Assistant reads its status and can switch its outputs, the light and some settings. While Home Assistant holds the connection, the UGREEN app can't connect."
+      }
+    },
+    "abort": {
+      "already_configured": "This power station is already set up.",
+      "no_devices_found": "No PowerRoam is visible. Check that it is on, in range, and that the UGREEN app isn't connected to it."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Battery"
+      },
+      "input_power": {
+        "name": "Input power"
+      },
+      "output_power": {
+        "name": "Output power"
+      },
+      "ac_output_power": {
+        "name": "AC output power"
+      },
+      "usb_output_power": {
+        "name": "USB output power"
+      },
+      "dc_output_power": {
+        "name": "DC output power"
+      },
+      "charge_time": {
+        "name": "Charge time remaining"
+      },
+      "discharge_time": {
+        "name": "Discharge time remaining"
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
+      },
+      "mode": {
+        "name": "Mode",
+        "state": {
+          "charging": "Charging",
+          "bypass": "Bypass",
+          "discharging": "On battery",
+          "idle": "Idle"
+        }
+      },
+      "battery_power": {
+        "name": "Battery power"
+      },
+      "energy_remaining": {
+        "name": "Energy remaining"
+      },
+      "battery_health": {
+        "name": "Battery health"
+      },
+      "battery_cycles": {
+        "name": "Battery cycles"
+      },
+      "capacity_remaining": {
+        "name": "Capacity remaining"
+      },
+      "battery_temp_1": {
+        "name": "Battery temperature 1"
+      },
+      "battery_temp_2": {
+        "name": "Battery temperature 2"
+      },
+      "inverter_temp_1": {
+        "name": "Inverter temperature 1"
+      },
+      "inverter_temp_2": {
+        "name": "Inverter temperature 2"
+      },
+      "ac_frequency": {
+        "name": "AC frequency"
+      },
+      "cell_spread": {
+        "name": "Cell voltage spread"
+      },
+      "cell_voltage": {
+        "name": "Cell {cell} voltage"
+      },
+      "fault_raw": {
+        "name": "Fault bytes (raw)"
+      },
+      "rssi": {
+        "name": "Signal strength"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "Fault"
+      },
+      "low_battery_warning": {
+        "name": "Low battery warning"
+      },
+      "standby": {
+        "name": "Standby"
+      },
+      "connected": {
+        "name": "Connected"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "AC output"
+      },
+      "dc_output": {
+        "name": "DC output"
+      },
+      "usb_output": {
+        "name": "USB output"
+      },
+      "quiet_mode": {
+        "name": "Quiet mode"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "Battery preservation"
+      },
+      "child_lock": {
+        "name": "Child safety lock"
+      },
+      "key_beep": {
+        "name": "Audio tones"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "Light",
+        "state": {
+          "off": "Off",
+          "low": "Low",
+          "high": "High",
+          "strobe": "Strobe",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "Operating mode",
+        "state": {
+          "standard": "Standard (5 h)",
+          "eco": "Eco (2 h)",
+          "always_on": "Always on"
+        }
+      },
+      "dc_charge_current": {
+        "name": "DC charging current",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "Low battery alert level",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "No Bluetooth link to the PowerRoam right now."
+    },
+    "write_failed": {
+      "message": "Writing to the PowerRoam failed: {error}"
+    },
+    "no_report": {
+      "message": "The PowerRoam didn't report the current state of {setting}."
+    },
+    "not_confirmed": {
+      "message": "The PowerRoam didn't confirm the {setting} change."
+    },
+    "other_settings_changed": {
+      "message": "Other settings changed as well: {settings}. Check the power station."
+    }
+  }
+}

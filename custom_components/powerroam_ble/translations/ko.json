@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "파워 스테이션을 선택하세요. 먼저 UGREEN 앱을 닫으세요. 기기는 한 번에 하나의 블루투스 연결만 허용합니다.",
+        "data": {
+          "address": "기기"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "{name}을(를) 설정할까요? Home Assistant가 상태를 읽고 출력, 조명 및 일부 설정을 전환할 수 있습니다. Home Assistant가 연결을 유지하는 동안 UGREEN 앱은 연결할 수 없습니다."
+      }
+    },
+    "abort": {
+      "already_configured": "이 파워 스테이션은 이미 설정되어 있습니다.",
+      "no_devices_found": "PowerRoam을 찾을 수 없습니다. 전원이 켜져 있고 범위 안에 있으며 UGREEN 앱이 연결되어 있지 않은지 확인하세요."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "배터리"
+      },
+      "input_power": {
+        "name": "입력 전력"
+      },
+      "output_power": {
+        "name": "출력 전력"
+      },
+      "ac_output_power": {
+        "name": "AC 출력 전력"
+      },
+      "usb_output_power": {
+        "name": "USB 출력 전력"
+      },
+      "dc_output_power": {
+        "name": "DC 출력 전력"
+      },
+      "charge_time": {
+        "name": "남은 충전 시간"
+      },
+      "discharge_time": {
+        "name": "남은 방전 시간"
+      },
+      "battery_voltage": {
+        "name": "배터리 전압"
+      },
+      "mode": {
+        "name": "모드",
+        "state": {
+          "charging": "충전 중",
+          "bypass": "바이패스",
+          "discharging": "배터리 사용",
+          "idle": "대기"
+        }
+      },
+      "battery_power": {
+        "name": "배터리 전력"
+      },
+      "energy_remaining": {
+        "name": "남은 에너지"
+      },
+      "battery_health": {
+        "name": "배터리 상태"
+      },
+      "battery_cycles": {
+        "name": "배터리 사이클"
+      },
+      "capacity_remaining": {
+        "name": "남은 용량"
+      },
+      "battery_temp_1": {
+        "name": "배터리 온도 1"
+      },
+      "battery_temp_2": {
+        "name": "배터리 온도 2"
+      },
+      "inverter_temp_1": {
+        "name": "인버터 온도 1"
+      },
+      "inverter_temp_2": {
+        "name": "인버터 온도 2"
+      },
+      "ac_frequency": {
+        "name": "AC 주파수"
+      },
+      "cell_spread": {
+        "name": "셀 전압 차이"
+      },
+      "cell_voltage": {
+        "name": "셀 {cell} 전압"
+      },
+      "fault_raw": {
+        "name": "오류 바이트(원시)"
+      },
+      "rssi": {
+        "name": "신호 강도"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "오류"
+      },
+      "low_battery_warning": {
+        "name": "배터리 부족 경고"
+      },
+      "standby": {
+        "name": "대기 모드"
+      },
+      "connected": {
+        "name": "연결됨"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "AC 출력"
+      },
+      "dc_output": {
+        "name": "DC 출력"
+      },
+      "usb_output": {
+        "name": "USB 출력"
+      },
+      "quiet_mode": {
+        "name": "저소음 모드"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "배터리 보호"
+      },
+      "child_lock": {
+        "name": "어린이 보호 잠금"
+      },
+      "key_beep": {
+        "name": "알림음"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "조명",
+        "state": {
+          "off": "끔",
+          "low": "약",
+          "high": "강",
+          "strobe": "스트로브",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "작동 모드",
+        "state": {
+          "standard": "표준 (5시간)",
+          "eco": "절전 (2시간)",
+          "always_on": "항상 켜짐"
+        }
+      },
+      "dc_charge_current": {
+        "name": "DC 충전 전류",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "배터리 부족 경고 기준",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "현재 PowerRoam과 블루투스 연결이 없습니다."
+    },
+    "write_failed": {
+      "message": "PowerRoam에 쓰기 실패: {error}"
+    },
+    "no_report": {
+      "message": "PowerRoam이 '{setting}'의 현재 상태를 보고하지 않았습니다."
+    },
+    "not_confirmed": {
+      "message": "PowerRoam이 '{setting}' 변경을 확인하지 않았습니다."
+    },
+    "other_settings_changed": {
+      "message": "다른 설정도 변경되었습니다: {settings}. 파워 스테이션을 확인하세요."
+    }
+  }
+}

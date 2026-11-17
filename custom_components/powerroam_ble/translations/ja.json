@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "ポータブル電源を選択してください。先に UGREEN アプリを閉じてください。本体は同時に 1 つの Bluetooth 接続しか受け付けません。",
+        "data": {
+          "address": "デバイス"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "{name} を設定しますか？Home Assistant は状態を読み取り、出力、ライト、一部の設定を切り替えられます。Home Assistant が接続している間、UGREEN アプリは接続できません。"
+      }
+    },
+    "abort": {
+      "already_configured": "このポータブル電源はすでに設定されています。",
+      "no_devices_found": "PowerRoam が見つかりません。電源が入っていて範囲内にあり、UGREEN アプリが接続していないことを確認してください。"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "バッテリー"
+      },
+      "input_power": {
+        "name": "入力電力"
+      },
+      "output_power": {
+        "name": "出力電力"
+      },
+      "ac_output_power": {
+        "name": "AC 出力電力"
+      },
+      "usb_output_power": {
+        "name": "USB 出力電力"
+      },
+      "dc_output_power": {
+        "name": "DC 出力電力"
+      },
+      "charge_time": {
+        "name": "充電残り時間"
+      },
+      "discharge_time": {
+        "name": "放電残り時間"
+      },
+      "battery_voltage": {
+        "name": "バッテリー電圧"
+      },
+      "mode": {
+        "name": "モード",
+        "state": {
+          "charging": "充電中",
+          "bypass": "バイパス",
+          "discharging": "バッテリー駆動",
+          "idle": "待機中"
+        }
+      },
+      "battery_power": {
+        "name": "バッテリー電力"
+      },
+      "energy_remaining": {
+        "name": "残りエネルギー"
+      },
+      "battery_health": {
+        "name": "バッテリーの健康状態"
+      },
+      "battery_cycles": {
+        "name": "バッテリーのサイクル数"
+      },
+      "capacity_remaining": {
+        "name": "残り容量"
+      },
+      "battery_temp_1": {
+        "name": "バッテリー温度 1"
+      },
+      "battery_temp_2": {
+        "name": "バッテリー温度 2"
+      },
+      "inverter_temp_1": {
+        "name": "インバーター温度 1"
+      },
+      "inverter_temp_2": {
+        "name": "インバーター温度 2"
+      },
+      "ac_frequency": {
+        "name": "AC 周波数"
+      },
+      "cell_spread": {
+        "name": "セル電圧差"
+      },
+      "cell_voltage": {
+        "name": "セル {cell} 電圧"
+      },
+      "fault_raw": {
+        "name": "故障バイト（生データ）"
+      },
+      "rssi": {
+        "name": "信号強度"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "故障"
+      },
+      "low_battery_warning": {
+        "name": "バッテリー残量低下の警告"
+      },
+      "standby": {
+        "name": "スタンバイ"
+      },
+      "connected": {
+        "name": "接続済み"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "AC 出力"
+      },
+      "dc_output": {
+        "name": "DC 出力"
+      },
+      "usb_output": {
+        "name": "USB 出力"
+      },
+      "quiet_mode": {
+        "name": "静音モード"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "バッテリー保護"
+      },
+      "child_lock": {
+        "name": "チャイルドロック"
+      },
+      "key_beep": {
+        "name": "操作音"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "ライト",
+        "state": {
+          "off": "オフ",
+          "low": "弱",
+          "high": "強",
+          "strobe": "ストロボ",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "動作モード",
+        "state": {
+          "standard": "標準（5 時間）",
+          "eco": "エコ（2 時間）",
+          "always_on": "常時オン"
+        }
+      },
+      "dc_charge_current": {
+        "name": "DC 充電電流",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "低残量警告のしきい値",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "現在 PowerRoam と Bluetooth で接続されていません。"
+    },
+    "write_failed": {
+      "message": "PowerRoam への書き込みに失敗しました: {error}"
+    },
+    "no_report": {
+      "message": "PowerRoam が「{setting}」の現在の状態を報告しませんでした。"
+    },
+    "not_confirmed": {
+      "message": "PowerRoam が「{setting}」の変更を確認しませんでした。"
+    },
+    "other_settings_changed": {
+      "message": "ほかの設定も変わりました: {settings}。本体を確認してください。"
+    }
+  }
+}

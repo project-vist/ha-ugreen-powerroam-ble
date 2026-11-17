@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "Выберите зарядную станцию. Сначала закройте приложение UGREEN: станция принимает только одно Bluetooth-подключение.",
+        "data": {
+          "address": "Устройство"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "Настроить {name}? Home Assistant будет читать её состояние и сможет переключать выходы, фонарь и некоторые настройки. Пока Home Assistant удерживает подключение, приложение UGREEN не сможет подключиться."
+      }
+    },
+    "abort": {
+      "already_configured": "Эта зарядная станция уже настроена.",
+      "no_devices_found": "PowerRoam не найден. Убедитесь, что станция включена, находится рядом и приложение UGREEN к ней не подключено."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Батарея"
+      },
+      "input_power": {
+        "name": "Входная мощность"
+      },
+      "output_power": {
+        "name": "Выходная мощность"
+      },
+      "ac_output_power": {
+        "name": "Мощность выхода AC"
+      },
+      "usb_output_power": {
+        "name": "Мощность выходов USB"
+      },
+      "dc_output_power": {
+        "name": "Мощность выхода DC"
+      },
+      "charge_time": {
+        "name": "Время до полного заряда"
+      },
+      "discharge_time": {
+        "name": "Время до разряда"
+      },
+      "battery_voltage": {
+        "name": "Напряжение батареи"
+      },
+      "mode": {
+        "name": "Режим",
+        "state": {
+          "charging": "Заряжается",
+          "bypass": "Байпас",
+          "discharging": "От батареи",
+          "idle": "Простой"
+        }
+      },
+      "battery_power": {
+        "name": "Мощность батареи"
+      },
+      "energy_remaining": {
+        "name": "Остаток энергии"
+      },
+      "battery_health": {
+        "name": "Состояние батареи"
+      },
+      "battery_cycles": {
+        "name": "Циклы батареи"
+      },
+      "capacity_remaining": {
+        "name": "Остаток ёмкости"
+      },
+      "battery_temp_1": {
+        "name": "Температура батареи 1"
+      },
+      "battery_temp_2": {
+        "name": "Температура батареи 2"
+      },
+      "inverter_temp_1": {
+        "name": "Температура инвертора 1"
+      },
+      "inverter_temp_2": {
+        "name": "Температура инвертора 2"
+      },
+      "ac_frequency": {
+        "name": "Частота AC"
+      },
+      "cell_spread": {
+        "name": "Разброс напряжений элементов"
+      },
+      "cell_voltage": {
+        "name": "Напряжение элемента {cell}"
+      },
+      "fault_raw": {
+        "name": "Байты ошибки (сырые)"
+      },
+      "rssi": {
+        "name": "Уровень сигнала"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "Неисправность"
+      },
+      "low_battery_warning": {
+        "name": "Предупреждение о низком заряде"
+      },
+      "standby": {
+        "name": "Режим ожидания"
+      },
+      "connected": {
+        "name": "Подключено"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "Выход AC"
+      },
+      "dc_output": {
+        "name": "Выход DC"
+      },
+      "usb_output": {
+        "name": "Выходы USB"
+      },
+      "quiet_mode": {
+        "name": "Тихий режим"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "Сбережение батареи"
+      },
+      "child_lock": {
+        "name": "Защита от детей"
+      },
+      "key_beep": {
+        "name": "Звуковые сигналы"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "Фонарь",
+        "state": {
+          "off": "Выключен",
+          "low": "Слабый",
+          "high": "Яркий",
+          "strobe": "Стробоскоп",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "Режим работы",
+        "state": {
+          "standard": "Стандартный (5 ч)",
+          "eco": "Экономный (2 ч)",
+          "always_on": "Всегда включено"
+        }
+      },
+      "dc_charge_current": {
+        "name": "Ток заряда DC",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "Порог предупреждения о низком заряде",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "Сейчас нет Bluetooth-подключения к PowerRoam."
+    },
+    "write_failed": {
+      "message": "Не удалось записать в PowerRoam: {error}"
+    },
+    "no_report": {
+      "message": "PowerRoam не сообщил текущее состояние для «{setting}»."
+    },
+    "not_confirmed": {
+      "message": "PowerRoam не подтвердил изменение «{setting}»."
+    },
+    "other_settings_changed": {
+      "message": "Изменились и другие настройки: {settings}. Проверьте станцию."
+    }
+  }
+}

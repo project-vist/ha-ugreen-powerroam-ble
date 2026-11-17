@@ -1,0 +1,196 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "UGREEN PowerRoam",
+        "description": "选择电源站。请先关闭 UGREEN 应用：设备同一时间只接受一个蓝牙连接。",
+        "data": {
+          "address": "设备"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "要设置 {name} 吗？Home Assistant 会读取其状态，并可开关输出、照明灯和部分设置。在 Home Assistant 保持连接期间，UGREEN 应用无法连接。"
+      }
+    },
+    "abort": {
+      "already_configured": "此电源站已设置。",
+      "no_devices_found": "未发现 PowerRoam。请确认设备已开机、在范围内，且 UGREEN 应用未与其连接。"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "电池"
+      },
+      "input_power": {
+        "name": "输入功率"
+      },
+      "output_power": {
+        "name": "输出功率"
+      },
+      "ac_output_power": {
+        "name": "交流输出功率"
+      },
+      "usb_output_power": {
+        "name": "USB 输出功率"
+      },
+      "dc_output_power": {
+        "name": "直流输出功率"
+      },
+      "charge_time": {
+        "name": "剩余充电时间"
+      },
+      "discharge_time": {
+        "name": "剩余放电时间"
+      },
+      "battery_voltage": {
+        "name": "电池电压"
+      },
+      "mode": {
+        "name": "模式",
+        "state": {
+          "charging": "充电中",
+          "bypass": "旁路",
+          "discharging": "电池供电",
+          "idle": "空闲"
+        }
+      },
+      "battery_power": {
+        "name": "电池功率"
+      },
+      "energy_remaining": {
+        "name": "剩余电量"
+      },
+      "battery_health": {
+        "name": "电池健康度"
+      },
+      "battery_cycles": {
+        "name": "电池循环次数"
+      },
+      "capacity_remaining": {
+        "name": "剩余容量"
+      },
+      "battery_temp_1": {
+        "name": "电池温度 1"
+      },
+      "battery_temp_2": {
+        "name": "电池温度 2"
+      },
+      "inverter_temp_1": {
+        "name": "逆变器温度 1"
+      },
+      "inverter_temp_2": {
+        "name": "逆变器温度 2"
+      },
+      "ac_frequency": {
+        "name": "交流频率"
+      },
+      "cell_spread": {
+        "name": "电芯电压差"
+      },
+      "cell_voltage": {
+        "name": "电芯 {cell} 电压"
+      },
+      "fault_raw": {
+        "name": "故障字节（原始）"
+      },
+      "rssi": {
+        "name": "信号强度"
+      }
+    },
+    "binary_sensor": {
+      "fault": {
+        "name": "故障"
+      },
+      "low_battery_warning": {
+        "name": "低电量警告"
+      },
+      "standby": {
+        "name": "待机"
+      },
+      "connected": {
+        "name": "已连接"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "交流输出"
+      },
+      "dc_output": {
+        "name": "直流输出"
+      },
+      "usb_output": {
+        "name": "USB 输出"
+      },
+      "quiet_mode": {
+        "name": "静音模式"
+      },
+      "u_turbo": {
+        "name": "U-Turbo"
+      },
+      "battery_care": {
+        "name": "电池保养"
+      },
+      "child_lock": {
+        "name": "儿童锁"
+      },
+      "key_beep": {
+        "name": "提示音"
+      }
+    },
+    "select": {
+      "light": {
+        "name": "照明灯",
+        "state": {
+          "off": "关",
+          "low": "弱光",
+          "high": "强光",
+          "strobe": "频闪",
+          "sos": "SOS"
+        }
+      },
+      "operating_mode": {
+        "name": "工作模式",
+        "state": {
+          "standard": "标准（5 小时）",
+          "eco": "节能（2 小时）",
+          "always_on": "常开"
+        }
+      },
+      "dc_charge_current": {
+        "name": "直流充电电流",
+        "state": {
+          "4": "4 A",
+          "6": "6 A",
+          "8": "8 A"
+        }
+      },
+      "low_battery_alert": {
+        "name": "低电量警告阈值",
+        "state": {
+          "5": "5 %",
+          "10": "10 %",
+          "20": "20 %"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_link": {
+      "message": "当前与 PowerRoam 没有蓝牙连接。"
+    },
+    "write_failed": {
+      "message": "写入 PowerRoam 失败：{error}"
+    },
+    "no_report": {
+      "message": "PowerRoam 未报告“{setting}”的当前状态。"
+    },
+    "not_confirmed": {
+      "message": "PowerRoam 未确认“{setting}”的更改。"
+    },
+    "other_settings_changed": {
+      "message": "其他设置也发生了变化：{settings}。请检查电源站。"
+    }
+  }
+}
