@@ -18,6 +18,17 @@
       "no_devices_found": "No PowerRoam is visible. Check that it is on, in range, and that the UGREEN app isn't connected to it."
     }
   },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Battery capacity",
+        "description": "Battery capacity of the {model}, in Wh. Battery power, Energy remaining and Mode are worked out from it. Leave empty to use the known value for the model.",
+        "data": {
+          "capacity_wh": "Battery capacity"
+        }
+      }
+    }
+  },
   "entity": {
     "sensor": {
       "battery": {

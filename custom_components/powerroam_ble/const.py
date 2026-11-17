@@ -8,10 +8,15 @@ DOMAIN = "powerroam_ble"
 NOTIFY_UUID = "0000abf2-0000-1000-8000-00805f9b34fb"
 WRITE_UUID = "0000abf1-0000-1000-8000-00805f9b34fb"
 NAME_PREFIX = "ugreen gs"
+# Picked by hand from the list, any UGREEN name is offered when no unit
+# advertises the usual "ugreen gs" name.
+FALLBACK_NAME_PREFIX = "ugreen"
 
 # Battery capacity by the model in the advertised name ("ugreen gs1200").
-# Only models checked against a real unit; others get no derived values.
-CAPACITY_WH = {"GS1200": 1024}
+# Other models get no derived values unless the capacity is set in the
+# options. GS2200: 2048 Wh per UGREEN's specifications, name assumed.
+CAPACITY_WH = {"GS1200": 1024, "GS2200": 2048}
+CONF_CAPACITY_WH = "capacity_wh"
 
 # The unit pushes every ~0.6 s; entities are written at most this often so
 # the recorder isn't flooded on small hosts such as a Raspberry Pi.

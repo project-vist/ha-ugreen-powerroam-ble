@@ -62,12 +62,18 @@ class PowerRoamError(Exception):
 class PowerRoamBle:
     """Owns the connection, the last decoded values and the entity listeners."""
 
-    def __init__(self, hass: HomeAssistant, address: str, name: str | None) -> None:
+    def __init__(
+        self,
+        hass: HomeAssistant,
+        address: str,
+        name: str | None,
+        capacity_wh: int | None = None,
+    ) -> None:
         self._hass = hass
         self.address = address
         self.name = name or address
-        self.model = self.name.upper().removeprefix("UGREEN").strip() or None
-        self._capacity_wh = CAPACITY_WH.get(self.model or "")
+        self.model = protocol.model_from_name(self.name)
+        self.capacity_wh = capacity_wh or CAPACITY_WH.get(self.model or "")
         self.data: dict[str, Any] = {}
         self._listeners: list[Callable[[], None]] = []
         self._client: BleakClientWithServiceCache | None = None
@@ -403,7 +409,7 @@ class PowerRoamBle:
                 queue.put_nowait(frame.data)
 
         if changed:
-            for key, value in protocol.derived(self.data, self._capacity_wh).items():
+            for key, value in protocol.derived(self.data, self.capacity_wh).items():
                 self.data[key] = value
 
         # The first frame of a link is written at once, unchanged values

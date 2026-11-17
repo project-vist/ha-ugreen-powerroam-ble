@@ -102,7 +102,8 @@ SENSORS: tuple[SensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.VOLTAGE,
         state_class=SensorStateClass.MEASUREMENT,
     ),
-    # Worked out by protocol.derived(); need the model's capacity (GS1200 only).
+    # Worked out by protocol.derived(); need the battery capacity (known
+    # models, or set in the options).
     _sensor(
         "mode",
         device_class=SensorDeviceClass.ENUM,

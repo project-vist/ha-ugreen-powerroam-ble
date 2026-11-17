@@ -150,3 +150,19 @@ async def test_private_frames_stay_out_of_debug_logs(
     assert "0x05 <private>" in caplog.text
     assert "0x13 00" in caplog.text
     await device.stop()
+
+
+@pytest.mark.parametrize(
+    ("name", "option", "capacity"),
+    [
+        ("ugreen gs2200", None, 2048),
+        (NAME, None, 1024),
+        ("ugreen gs9", None, None),
+        ("ugreen gs9", 1500, 1500),
+        (NAME, 1100, 1100),
+    ],
+)
+def test_capacity_from_the_model_or_the_option(
+    hass: HomeAssistant, name: str, option: int | None, capacity: int | None
+) -> None:
+    assert PowerRoamBle(hass, ADDRESS, name, option).capacity_wh == capacity

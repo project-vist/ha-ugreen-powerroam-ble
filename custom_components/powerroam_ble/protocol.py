@@ -248,6 +248,11 @@ def decode_setting(opcode: int, data: bytes) -> str | None:
     return BYTE_SETTINGS[opcode][1].get(data[0]) if data else None
 
 
+def model_from_name(name: str | None) -> str | None:
+    """The model in the advertised name: "ugreen gs1200" → "GS1200"."""
+    return (name or "").upper().removeprefix("UGREEN").strip() or None
+
+
 def _u16(data: bytes, offset: int) -> int | None:
     if offset + 2 > len(data):
         return None
