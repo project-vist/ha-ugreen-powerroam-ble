@@ -16,10 +16,15 @@ async def async_get_config_entry_diagnostics(
     device = entry.runtime_data
     age = device.last_frame_age
     return {
+        "advertised_name": None if device.name == device.address else device.name,
+        "rssi": device.rssi,
         "connected": device.connected,
         "link_up": device.link_up,
         "available": device.available,
+        "connect_attempts": device.connect_attempts,
         "connect_count": device.connect_count,
+        "last_error": device.last_error,
+        "gatt": device.gatt,
         "link_durations_s": device.link_durations,
         "frames_received": device.frames_received,
         "crc_failures": device.crc_failures,

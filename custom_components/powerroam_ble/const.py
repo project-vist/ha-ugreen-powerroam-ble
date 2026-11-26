@@ -36,6 +36,8 @@ HOLD_AFTER_LAST_FRAME = 120.0
 # cuts the wait short (not below the start value). A link that was up and
 # dropped is retried at once.
 BACKOFF_START = 5
+# Failed connects in a row before one is logged as a warning, not debug.
+FAILURES_BEFORE_WARNING = 3
 BACKOFF_MAX = 60
 
 # A write waits for the next reported state and builds on that, so a

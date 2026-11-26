@@ -27,6 +27,7 @@ from .const import (
     BACKOFF_MAX,
     BACKOFF_START,
     CAPACITY_WH,
+    FAILURES_BEFORE_WARNING,
     FRAME_STALE_AFTER,
     HOLD_AFTER_LAST_FRAME,
     NOTIFY_UUID,
@@ -95,6 +96,12 @@ class PowerRoamBle:
         # flaky link shows up as a climbing connect_count. Link durations tell
         # a radio problem (random) from a protocol timeout (always the same).
         self.connect_count = 0
+        self.connect_attempts = 0
+        self.last_error: str | None = None
+        self._failures = 0
+        # The unit's GATT table as "service characteristic properties", read at
+        # every connect: tells a model with other UUIDs from a radio problem.
+        self.gatt: list[str] = []
         self.link_durations: list[int] = []
         self.frames_received = 0
         self.crc_failures = 0
@@ -199,7 +206,12 @@ class PowerRoamBle:
             except asyncio.CancelledError:
                 raise
             except Exception as err:  # the reconnect loop must survive anything
-                _LOGGER.debug("PowerRoam %s: connection failed: %s", self.name, err)
+                self.last_error = f"{type(err).__name__}: {err}".replace(self.address, "<address>")
+                self._failures += 1
+                log = (
+                    _LOGGER.warning if self._failures == FAILURES_BEFORE_WARNING else _LOGGER.debug
+                )
+                log("PowerRoam %s: connection failed: %s", self.name, err)
             if self._stopped:
                 return
             await asyncio.sleep(BACKOFF_START)
@@ -212,6 +224,7 @@ class PowerRoamBle:
         return bluetooth.async_ble_device_from_address(self._hass, self.address, connectable=True)
 
     async def _connect_once(self) -> None:
+        self.connect_attempts += 1
         ble_device = self._ble_device()
         if ble_device is None:
             raise BleakError("not visible to any adapter")
@@ -231,8 +244,15 @@ class PowerRoamBle:
         self._link_reported = False
         connected_at = time.monotonic()
         try:
+            self.gatt = [
+                f"{service.uuid} {char.uuid} {','.join(char.properties)}"
+                for service in client.services
+                for char in service.characteristics
+            ]
             await client.start_notify(NOTIFY_UUID, self._on_notify)
             self.connect_count += 1
+            self._failures = 0
+            self.last_error = None
             _LOGGER.debug("PowerRoam %s: connected", self.name)
             while not self._disconnected.is_set():
                 with contextlib.suppress(TimeoutError):
