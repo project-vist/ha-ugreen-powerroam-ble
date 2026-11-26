@@ -28,6 +28,7 @@ from .const import (
     BACKOFF_MAX,
     BACKOFF_START,
     CAPACITY_WH,
+    CONNECT_TIMEOUT,
     FAILURES_BEFORE_WARNING,
     FRAME_STALE_AFTER,
     HOLD_AFTER_LAST_FRAME,
@@ -46,6 +47,13 @@ _FRAME_LOGGER = logging.getLogger(f"{__package__}.frames")
 
 # More than a couple of frames buffered means the stream lost sync.
 MAX_BUFFER = 1024
+
+
+class _PatientClient(BleakClientWithServiceCache):
+    """Gives a weak link CONNECT_TIMEOUT to come up and list its services."""
+
+    async def connect(self, **kwargs: Any) -> None:
+        await super().connect(**{**kwargs, "timeout": CONNECT_TIMEOUT})
 
 
 class PowerRoamError(Exception):
@@ -234,7 +242,7 @@ class PowerRoamBle:
 
         self._disconnected.clear()
         client = await establish_connection(
-            BleakClientWithServiceCache,
+            _PatientClient,
             ble_device,
             self.name,
             disconnected_callback=self._on_disconnect,

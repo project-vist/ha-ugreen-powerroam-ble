@@ -195,3 +195,10 @@ async def test_failed_connects_are_kept_for_diagnostics(
     assert device.last_error == "BleakError: <address> gone"
     assert "connection failed" in caplog.text
     assert ADDRESS.lower() not in caplog.text.lower()
+
+
+async def test_connect_waits_for_slow_service_discovery() -> None:
+    client = object.__new__(ble._PatientClient)
+    with patch.object(ble.BleakClientWithServiceCache, "connect") as connect:
+        await client.connect(timeout=20.0, dangerous_use_bleak_cache=False)
+    connect.assert_awaited_once_with(timeout=ble.CONNECT_TIMEOUT, dangerous_use_bleak_cache=False)
