@@ -40,6 +40,12 @@ BACKOFF_START = 5
 FAILURES_BEFORE_WARNING = 3
 BACKOFF_MAX = 60
 
+# Seconds for one connect, service discovery included. bleak-retry-connector
+# allows 20; at about -95 dBm a GS2200 takes 6 s to link and 13 s more to
+# list its services, so every attempt timed out with the link still up.
+# Stays under bleak-retry-connector's 60 s safety timeout.
+CONNECT_TIMEOUT = 45.0
+
 # A write waits for the next reported state and builds on that, so a
 # setting changed on the unit a minute ago isn't reverted from a held copy.
 SWITCH_STATE_WAIT = 5.0
