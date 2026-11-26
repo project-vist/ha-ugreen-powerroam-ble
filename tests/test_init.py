@@ -124,3 +124,5 @@ async def test_diagnostics_hold_no_identifiers(
     assert diag["payloads"]["0x16"] == CHARGING[0x16]
     text = str(diag)
     assert ADDRESS not in text and serial.hex() not in text and mac.hex() not in text
+    assert diag["advertised_name"] == NAME
+    assert diag["last_error"] is None and diag["gatt"] == []

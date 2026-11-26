@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
+import asyncio
+from unittest.mock import patch
+
 import pytest
+from bleak.exc import BleakError
 from homeassistant.core import HomeAssistant
 
 from custom_components.powerroam_ble import ble, protocol
@@ -166,3 +170,28 @@ def test_capacity_from_the_model_or_the_option(
     hass: HomeAssistant, name: str, option: int | None, capacity: int | None
 ) -> None:
     assert PowerRoamBle(hass, ADDRESS, name, option).capacity_wh == capacity
+
+
+async def test_failed_connects_are_kept_for_diagnostics(
+    hass: HomeAssistant, caplog: pytest.LogCaptureFixture
+) -> None:
+    device = PowerRoamBle(hass, ADDRESS, NAME)
+    with (
+        patch.object(device, "_ble_device", return_value=object()),
+        patch.object(
+            ble, "establish_connection", side_effect=BleakError(f"{ADDRESS.lower()} gone")
+        ),
+        patch.object(ble, "BACKOFF_START", 0),
+        patch.object(ble, "BACKOFF_MAX", 0),
+    ):
+        task = hass.async_create_background_task(device._run(), "test")
+        for _ in range(50):
+            await asyncio.sleep(0)
+            if device.connect_attempts >= 3:
+                break
+        device._stopped = True
+        task.cancel()
+    assert device.connect_attempts >= 3
+    assert device.last_error == "BleakError: <address> gone"
+    assert "connection failed" in caplog.text
+    assert ADDRESS.lower() not in caplog.text.lower()
