@@ -178,7 +178,9 @@ async def test_failed_connects_are_kept_for_diagnostics(
     device = PowerRoamBle(hass, ADDRESS, NAME)
     with (
         patch.object(device, "_ble_device", return_value=object()),
-        patch.object(ble, "establish_connection", side_effect=BleakError(f"{ADDRESS} gone")),
+        patch.object(
+            ble, "establish_connection", side_effect=BleakError(f"{ADDRESS.lower()} gone")
+        ),
         patch.object(ble, "BACKOFF_START", 0),
         patch.object(ble, "BACKOFF_MAX", 0),
     ):
@@ -192,3 +194,4 @@ async def test_failed_connects_are_kept_for_diagnostics(
     assert device.connect_attempts >= 3
     assert device.last_error == "BleakError: <address> gone"
     assert "connection failed" in caplog.text
+    assert ADDRESS.lower() not in caplog.text.lower()

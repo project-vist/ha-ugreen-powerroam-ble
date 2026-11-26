@@ -13,6 +13,7 @@ from __future__ import annotations
 import asyncio
 import contextlib
 import logging
+import re
 import time
 from collections.abc import Callable
 from typing import Any
@@ -206,12 +207,14 @@ class PowerRoamBle:
             except asyncio.CancelledError:
                 raise
             except Exception as err:  # the reconnect loop must survive anything
-                self.last_error = f"{type(err).__name__}: {err}".replace(self.address, "<address>")
+                self.last_error = re.sub(
+                    re.escape(self.address), "<address>", f"{type(err).__name__}: {err}", flags=re.I
+                )
                 self._failures += 1
                 log = (
                     _LOGGER.warning if self._failures == FAILURES_BEFORE_WARNING else _LOGGER.debug
                 )
-                log("PowerRoam %s: connection failed: %s", self.name, err)
+                log("PowerRoam %s: connection failed: %s", self.name, self.last_error)
             if self._stopped:
                 return
             await asyncio.sleep(BACKOFF_START)
